@@ -1,0 +1,5 @@
+  name: ${project.name}
+  main: nl.lucasridder.lhub.LHub
+  version: ${describe}
+  description: ${project.description}
+  author: ${module.author}

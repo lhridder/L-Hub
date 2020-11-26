@@ -1,6 +1,7 @@
 package nl.lucasridder.lhub.commands;
 
 import nl.lucasridder.lhub.LHub;
+import nl.lucasridder.lhub.Util;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -13,10 +14,7 @@ public class SetSpawn implements CommandExecutor {
     LHub plugin = LHub.get();
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if(!(sender instanceof Player)) {
-            //zeg het
-            sender.sendMessage(ChatColor.RED + "Je bent geen speler");
-        } else {
+        if(Util.requirePlayer(sender)) {
             Player player = (Player) sender;
             Location loc = player.getLocation();
             int x = loc.getBlockX();

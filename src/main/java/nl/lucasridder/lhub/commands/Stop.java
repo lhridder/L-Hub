@@ -1,7 +1,7 @@
 package nl.lucasridder.lhub.commands;
 
 import nl.lucasridder.lhub.LHub;
-import org.bukkit.Bukkit;
+import nl.lucasridder.lhub.Util;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -13,10 +13,7 @@ public class Stop implements CommandExecutor {
     LHub plugin = LHub.get();
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if(!(sender instanceof Player)) {
-            //zeg het
-            sender.sendMessage(ChatColor.RED + "Je bent geen speler");
-        } else {
+        if(Util.requirePlayer(sender)) {
             sender.sendMessage(ChatColor.GREEN + "Kicking all players...");
             if(plugin.getServer().getOnlinePlayers().size() != 0) {
                 for (Player players : plugin.getServer().getOnlinePlayers()) {

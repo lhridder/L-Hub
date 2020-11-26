@@ -1,7 +1,6 @@
 package nl.lucasridder.lhub.commands;
 
-import nl.lucasridder.lhub.methods.ServerSender;
-import org.bukkit.ChatColor;
+import nl.lucasridder.lhub.Util;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -19,12 +18,9 @@ public class ServerTeleport implements CommandExecutor {
     }
 
     public boolean onCommand(CommandSender sender, Command command, String s, String[] strings) {
-        if (!(sender instanceof Player)) {
-            sender.sendMessage(ChatColor.RED + "Je bent geen speler!");
-            return false;
-        } else {
+        if (Util.requirePlayer(sender)) {
             Player player = (Player) sender;
-            ServerSender.sendTarget(player, server);
+            Util.sendTarget(player, server);
         }
         return true;
     }

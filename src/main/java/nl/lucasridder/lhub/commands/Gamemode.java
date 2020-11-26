@@ -1,5 +1,6 @@
 package nl.lucasridder.lhub.commands;
 
+import nl.lucasridder.lhub.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -15,10 +16,7 @@ import java.util.List;
 public class Gamemode implements CommandExecutor, TabCompleter {
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if(!(sender instanceof Player)) {
-            //zeg het
-            sender.sendMessage(ChatColor.RED + "Je bent geen speler");
-        } else {
+        if(Util.requirePlayer(sender)) {
             Player player = (Player) sender;
             //continue
 

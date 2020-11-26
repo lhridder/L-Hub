@@ -1,14 +1,30 @@
-package nl.lucasridder.lhub.methods;
+package nl.lucasridder.lhub;
 
-import nl.lucasridder.lhub.LHub;
 import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-public class ServerSender {
+/**
+ * @author Snowp
+ */
+public class Util {
+
+    public static boolean requirePlayer(CommandSender p) {
+        if(!(p instanceof Player)) {
+            p.sendMessage(ChatColor.RED + "Je bent geen speler!");
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean requirePlayer(Object p) {
+        return p instanceof Player;
+    }
+
 
     public static void sendTarget(Player player, String server) {
         player.sendMessage(ChatColor.DARK_GRAY + "Je wordt nu doorverbonden naar: " + ChatColor.GOLD + server);
@@ -22,17 +38,6 @@ public class ServerSender {
             e.printStackTrace();
         }
         player.sendPluginMessage(LHub.get(), "BungeeCord", b.toByteArray());
-
-        //TODO PlayerBoolean.put(player, server);
-
-        /*
-        //remove player from PlayerBoolean
-        Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-            public void run() {
-                PlayerBoolean.remove(player);
-            }
-        }, 5*20L);
-
-         */
     }
+
 }

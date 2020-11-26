@@ -124,7 +124,7 @@ public class PlayerManager implements Listener {
         } catch(Exception ex) {}
 
 
-        format = format.replaceFirst("\\$name", (player.isOp() ? opColor : playerColor) + name);
+        format = format.replaceFirst("\\$player", (player.isOp() ? opColor : playerColor) + name);
         format = format.replaceFirst("\\$separator", separatorColor + separator);
         format = format.replaceFirst("\\$message", messageColor + message);
 

@@ -1,5 +1,6 @@
 package nl.lucasridder.lhub.commands;
 
+import nl.lucasridder.lhub.methods.ServerSender;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -14,7 +15,7 @@ public class KitPvP implements CommandExecutor {
             sender.sendMessage(ChatColor.RED + "Je bent geen speler");
         } else {
             Player player = (Player) sender;
-            SendPlayer(player, "kitpvp");
+            ServerSender.sendTarget(player, "kitpvp");
         }
         return true;
     }

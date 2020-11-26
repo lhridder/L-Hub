@@ -2,6 +2,7 @@ package nl.lucasridder.lhub;
 
 import nl.lucasridder.lhub.commands.*;
 import nl.lucasridder.lhub.listeners.*;
+import nl.lucasridder.lhub.methods.PlayerCount;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
@@ -25,14 +26,6 @@ public class LHub extends JavaPlugin implements PluginMessageListener {
     public void onEnable() {
         //start plugin
 
-        //start counter
-        new BukkitRunnable() {
-            public void run() {
-                if(getServer().getOnlinePlayers().size() != 0) {
-                    playerCount();
-                }
-            }
-        }.runTaskTimer(this, 100, 100);
 
         //config
         this.getConfig().options().copyDefaults(true);
@@ -45,6 +38,16 @@ public class LHub extends JavaPlugin implements PluginMessageListener {
         getLogger().info("[LHub] Registered commands");
         registerPluginChannel();
         getLogger().info("[LHub] Registered bungee channel");
+
+        //start counter
+        new BukkitRunnable() {
+            public void run() {
+                if(getServer().getOnlinePlayers().size() != 0) {
+                    PlayerCount.getCount("all");
+                }
+            }
+        }.runTaskTimer(this, 100, 100);
+        getLogger().info("[LHub] Started player listener");
 
         //finish
         getLogger().info("[LHub] has been successfully enabled");

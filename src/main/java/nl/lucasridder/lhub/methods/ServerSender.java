@@ -22,6 +22,7 @@ public class ServerSender {
             e.printStackTrace();
         }
         player.sendPluginMessage(LHub.get(), "BungeeCord", b.toByteArray());
+
         //TODO PlayerBoolean.put(player, server);
 
         /*

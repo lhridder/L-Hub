@@ -1,5 +1,6 @@
 # L-Hub
 mc-hub rewrite
+Minecraft 1.16 Hub server plugin based on spigot+paper api
 
 compile with maven
 

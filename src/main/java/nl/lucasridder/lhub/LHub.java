@@ -1,5 +1,6 @@
 package nl.lucasridder.lhub;
 
+import net.md_5.bungee.api.ChatColor;
 import nl.lucasridder.lhub.commands.*;
 import nl.lucasridder.lhub.listeners.*;
 import nl.lucasridder.lhub.methods.PlayerCount;
@@ -9,6 +10,10 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.messaging.PluginMessageListener;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scoreboard.DisplaySlot;
+import org.bukkit.scoreboard.Objective;
+import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.ScoreboardManager;
 
 public class LHub extends JavaPlugin implements PluginMessageListener {
 
@@ -20,6 +25,8 @@ public class LHub extends JavaPlugin implements PluginMessageListener {
     public LHub() {
         LHub.plugin = this;
     }
+
+    public int playerCount = -1;
 
     //On enable
     @Override
@@ -42,12 +49,16 @@ public class LHub extends JavaPlugin implements PluginMessageListener {
         //start counter
         new BukkitRunnable() {
             public void run() {
-                if(getServer().getOnlinePlayers().size() != 0) {
-                    PlayerCount.getCount("all");
+                if(getServer().getOnlinePlayers().size() > 0) {
+                    LHub.get().playerCount = PlayerCount.getGlobalPlayerCount();
+
+                    for (Player player : Bukkit.getOnlinePlayers()) {
+                        player.setScoreboard(generateScoreboard(player));
+                    }
                 }
             }
         }.runTaskTimer(this, 100, 100);
-        getLogger().info("[LHub] Started player listener");
+        getLogger().info("[LHub] Started scoreboard updater");
 
         //finish
         getLogger().info("[LHub] has been successfully enabled");
@@ -58,11 +69,6 @@ public class LHub extends JavaPlugin implements PluginMessageListener {
     public void onDisable() {
         //stop plugin
         saveConfig();
-
-        //stop scoreboard
-        for (Player onlinePlayers : Bukkit.getOnlinePlayers()) {
-            onlinePlayers.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
-        }
 
         //finish
         getLogger().info("[LHub] has been successfully disabled");
@@ -103,6 +109,72 @@ public class LHub extends JavaPlugin implements PluginMessageListener {
         getCommand("survival").setExecutor(new Staff());
         getCommand("vanish").setExecutor(new Vanish());
 
+    }
+
+    private Scoreboard generateScoreboard(Player player) {
+        ScoreboardManager manager = Bukkit.getScoreboardManager();
+        Scoreboard b = manager.getNewScoreboard();
+
+        Objective o = b.registerNewObjective("Gold", "", ChatColor.DARK_AQUA + "" + ChatColor.BOLD + "Lobby");
+        o.setDisplaySlot(DisplaySlot.SIDEBAR);
+
+        //staff 4 t/m 6
+        //check if player has staff permission
+        if(player.isOp()) {
+            //spacer 7
+            o.getScore(ChatColor.RED + "").setScore(7);
+
+            o.getScore(ChatColor.DARK_GREEN + "Staffmode: " + ChatColor.RED + "✘").setScore(6);
+
+            /* TODO: Fix staff system and enable this again.
+            //if staff mode enabled
+            if(Staff.containsKey(player)) {
+                //staff on 6
+                o.getScore(ChatColor.DARK_GREEN + "Staffmode: " + ChatColor.GREEN + "✔").setScore(6);
+                //check invis
+                if(Invis.containsKey(player)) {
+                    //invis on 5
+                    o.getScore(ChatColor.BLUE + "  Invisability: " + ChatColor.GREEN + "✔").setScore(5);
+                } else {
+                    //invis off 5
+                    o.getScore(ChatColor.BLUE + "  Invisability: " + ChatColor.RED + "✘").setScore(5);
+                }
+            } else {
+                //staff off 6
+                o.getScore(ChatColor.DARK_GREEN + "Staffmode: " + ChatColor.RED + "✘").setScore(6);
+            }
+             */
+
+        } else {
+            //spacer 6
+            o.getScore(ChatColor.RED + "").setScore(6);
+
+            //Welkom *speler* 5
+            o.getScore(ChatColor.YELLOW + "Welkom, " + ChatColor.GRAY + player.getName()).setScore(5);
+        }
+
+        //spacer 4
+        o.getScore(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "").setScore(4);
+
+        //totaal spelers proxy 3
+        o.getScore(ChatColor.YELLOW + "Totaal spelers: " + ChatColor.RED + this.playerCount).setScore(3);
+
+        //totaal spelers hub 2
+        int spelers = getServer().getOnlinePlayers().size();
+        /* TODO: Implement PlayerManager and re-enable
+        int invis = Invis.size();
+        int hub = spelers - invis;
+         */
+        o.getScore(ChatColor.BLUE + "  Hub: " + ChatColor.RED + spelers).setScore(2);
+
+
+        //spacer 1
+        o.getScore("").setScore(1);
+
+        //server footer 0
+        o.getScore(ChatColor.GREEN + "LucasRidder.nl").setScore(0);
+
+        return b;
     }
 
     public void onPluginMessageReceived(String s, Player player, byte[] bytes) {

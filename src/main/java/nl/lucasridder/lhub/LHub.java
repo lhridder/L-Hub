@@ -77,7 +77,6 @@ public class LHub extends JavaPlugin implements PluginMessageListener {
     //register event listeners
     public void registerListeners() {
         PluginManager pm = Bukkit.getServer().getPluginManager();
-        pm.registerEvents(new EntityDamage(), this);
         pm.registerEvents(new EntityInteract(), this);
         pm.registerEvents(new PlayerArmorStand(), this);
         pm.registerEvents(new PlayerClickInventory(), this);
@@ -85,7 +84,6 @@ public class LHub extends JavaPlugin implements PluginMessageListener {
         pm.registerEvents(new PlayerInteract(), this);
         pm.registerEvents(new PlayerLeave(), this);
         pm.registerEvents(new PlayerMove(), this);
-        pm.registerEvents(new PlayerPreCommand(), this);
         pm.registerEvents(new WeatherChange(), this);
 
         pm.registerEvents(new PlayerManager(), this);

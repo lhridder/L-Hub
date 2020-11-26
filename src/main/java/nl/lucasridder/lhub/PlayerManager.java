@@ -6,7 +6,9 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import java.util.UUID;
@@ -92,6 +94,7 @@ public class PlayerManager implements Listener {
         LHub.get().saveConfig();
     }
 
+
     @EventHandler
     public void onPlayerChat(AsyncPlayerChatEvent e) {
         Player player = e.getPlayer();
@@ -129,6 +132,31 @@ public class PlayerManager implements Listener {
         format = format.replaceFirst("\\$message", messageColor + message);
 
         e.setFormat(format);
+    }
+
+
+    //No Damage
+    @EventHandler
+    public void onDamage(EntityDamageEvent e) {
+        //cancel any damage
+        e.setCancelled(true);
+    }
+
+
+    // Command blocker
+    @EventHandler
+    public void onPlayerCommand(PlayerCommandPreprocessEvent e) {
+        String message = e.getMessage();
+        Player player = e.getPlayer();
+
+        if(!player.isOp()) {
+            if(!(message.equals("/help")
+                    | message.startsWith("/playtime")
+                    | message.startsWith("/pt")
+                    | message.equals("/survivall")
+                    | message.equals("/minigames")
+                    | message.equals("/kitpvp"))) e.setCancelled(true);
+        }
     }
 
 }

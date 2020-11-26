@@ -80,15 +80,15 @@ public class LHub extends JavaPlugin implements PluginMessageListener {
         pm.registerEvents(new EntityDamage(), this);
         pm.registerEvents(new EntityInteract(), this);
         pm.registerEvents(new PlayerArmorStand(), this);
-        pm.registerEvents(new PlayerChat(), this);
         pm.registerEvents(new PlayerClickInventory(), this);
         pm.registerEvents(new PlayerDrop(), this);
         pm.registerEvents(new PlayerInteract(), this);
-        pm.registerEvents(new PlayerJoin(), this);
         pm.registerEvents(new PlayerLeave(), this);
         pm.registerEvents(new PlayerMove(), this);
         pm.registerEvents(new PlayerPreCommand(), this);
         pm.registerEvents(new WeatherChange(), this);
+
+        pm.registerEvents(new PlayerManager(), this);
     }
 
     public void registerPluginChannel() {
@@ -161,7 +161,7 @@ public class LHub extends JavaPlugin implements PluginMessageListener {
 
         //totaal spelers hub 2
         int spelers = getServer().getOnlinePlayers().size();
-        /* TODO: Implement PlayerManager and re-enable
+        /* TODO: Implement StaffManager and re-enable
         int invis = Invis.size();
         int hub = spelers - invis;
          */

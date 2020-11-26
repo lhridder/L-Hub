@@ -1,0 +1,16 @@
+spawn:
+  x: 0
+  y: 0
+  z: 0
+  yaw: 0
+  pitch: 0
+
+chat:
+  format: "$player $separator $message"
+  separator: "»"
+  colors: # Color names are in the ChatColor format, see https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/ChatColor.html.
+    player: "GRAY"
+    opPlayer: "GOLD"
+    seperator: "DARK_GRAY"
+    message: "RESET"
+

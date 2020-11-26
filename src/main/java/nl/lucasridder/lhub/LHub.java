@@ -98,13 +98,13 @@ public class LHub extends JavaPlugin implements PluginMessageListener {
     public void registerCommands() {
         getCommand("gamemode").setExecutor(new Gamemode());
         getCommand("gamemode").setTabCompleter(new Gamemode());
-        getCommand("kitpvp").setExecutor(new KitPvP());
-        getCommand("minigames").setExecutor(new Minigames());
+        getCommand("kitpvp").setExecutor(new ServerTeleport("kitpvp"));
+        getCommand("minigames").setExecutor(new ServerTeleport("minigames"));
         getCommand("playtime").setExecutor(new Playtime());
         getCommand("setspawn").setExecutor(new SetSpawn());
         getCommand("staff").setExecutor(new Staff());
         getCommand("stop").setExecutor(new Stop());
-        getCommand("survival").setExecutor(new Staff());
+        getCommand("survival").setExecutor(new ServerTeleport("survival"));
         getCommand("vanish").setExecutor(new Vanish());
 
     }

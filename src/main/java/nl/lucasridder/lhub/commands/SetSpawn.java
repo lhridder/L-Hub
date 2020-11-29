@@ -1,5 +1,6 @@
 package nl.lucasridder.lhub.commands;
 
+import nl.lucasridder.lhub.ConfigManager;
 import nl.lucasridder.lhub.LHub;
 import nl.lucasridder.lhub.Util;
 import org.bukkit.ChatColor;
@@ -22,12 +23,12 @@ public class SetSpawn implements CommandExecutor {
             int z = loc.getBlockZ();
             float yaw = loc.getYaw();
             float pitch = loc.getPitch();
-            plugin.getConfig().set("spawn.x", x);
-            plugin.getConfig().set("spawn.y", y);
-            plugin.getConfig().set("spawn.z", z);
-            plugin.getConfig().set("spawn.yaw", yaw);
-            plugin.getConfig().set("spawn.pitch", pitch);
-            plugin.saveConfig();
+            ConfigManager.set("spawn.x", x);
+            ConfigManager.set("spawn.y", y);
+            ConfigManager.set("spawn.z", z);
+            ConfigManager.set("spawn.yaw", yaw);
+            ConfigManager.set("spawn.pitch", pitch);
+            ConfigManager.save();
             sender.sendMessage(ChatColor.GREEN + "Spawn set");
         }
         return true;

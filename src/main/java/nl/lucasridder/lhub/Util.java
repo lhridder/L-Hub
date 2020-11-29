@@ -3,6 +3,8 @@ package nl.lucasridder.lhub;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -38,6 +40,13 @@ public class Util {
             e.printStackTrace();
         }
         player.sendPluginMessage(LHub.get(), "BungeeCord", b.toByteArray());
+    }
+
+
+    @NotNull
+    public static <T> T preventNull(@Nullable T value, @NotNull T d)
+    {
+        return (value == null ? d : value);
     }
 
 }

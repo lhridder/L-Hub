@@ -2,7 +2,6 @@ package nl.lucasridder.lhub;
 
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -19,7 +18,7 @@ import java.util.logging.Level;
  */
 public class PlayerManager implements Listener {
 
-    FileConfiguration config = LHub.get().getConfig();
+    LHub plugin = LHub.get();
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
@@ -28,11 +27,11 @@ public class PlayerManager implements Listener {
 
         //spawn loc
         try {
-            int x = config.getInt("spawn.x", 0);
-            int y = config.getInt("spawn.y", 0);
-            int z = config.getInt("spawn.z", 0);
-            float yaw = config.getInt("spawn.yaw", 0);
-            float pitch = config.getInt("spawn.pitch", 0);
+            int x = ConfigManager.getInt("spawn.x", 0);
+            int y = ConfigManager.getInt("spawn.y", 0);
+            int z = ConfigManager.getInt("spawn.z", 0);
+            float yaw = ConfigManager.getInt("spawn.yaw", 0);
+            float pitch = ConfigManager.getInt("spawn.pitch", 0);
             Location loc = new Location(player.getWorld(), x, y, z, pitch, yaw);
             player.teleport(loc);
         } catch (Exception e1) {
@@ -90,8 +89,7 @@ public class PlayerManager implements Listener {
 
         //register player in config
         // UUID uuid = player.getUniqueId();
-        config.set("player." + uuid + ".name", player.getName());
-        LHub.get().saveConfig();
+        ConfigManager.setAndSave("player." + uuid + ".name", player.getName());
     }
 
 
@@ -102,10 +100,8 @@ public class PlayerManager implements Listener {
         String message = e.getMessage();
 
 
-        String format = config.getString("chat.format", "$player $separator $message");
-        if(format == null) format = "$player $separator $message";
-        String separator = config.getString("chat.separator", "»");
-        if(separator == null) format = "»";
+        String format = ConfigManager.getString("chat.format", "$player $separator $message");
+        String separator = ConfigManager.getString("chat.separator", "»");
 
 
         ChatColor playerColor = ChatColor.GRAY;
@@ -114,17 +110,13 @@ public class PlayerManager implements Listener {
         ChatColor messageColor = ChatColor.RESET;
 
         try {
-            playerColor = ChatColor.of(config.getString("chat.color.player", "GRAY"));
-        } catch(Exception ex) {}
-        try {
-            opColor = ChatColor.of(config.getString("chat.color.opPlayer", "GOLD"));
-        } catch(Exception ex) {}
-        try {
-            separatorColor = ChatColor.of(config.getString("chat.color.separator", "DARK_GRAY"));
-        } catch(Exception ex) {}
-        try {
-            messageColor = ChatColor.of(config.getString("chat.color.message", "RESET"));
-        } catch(Exception ex) {}
+            playerColor = ChatColor.of(ConfigManager.getString("chat.color.player", "GRAY"));
+            opColor = ChatColor.of(ConfigManager.getString("chat.color.opPlayer", "GOLD"));
+            separatorColor = ChatColor.of(ConfigManager.getString("chat.color.separator", "DARK_GRAY"));
+            messageColor = ChatColor.of(ConfigManager.getString("chat.color.message", "RESET"));
+        } catch(IllegalArgumentException ex) {
+
+        }
 
 
         format = format.replaceFirst("\\$player", (player.isOp() ? opColor : playerColor) + name);

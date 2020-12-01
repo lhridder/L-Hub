@@ -22,6 +22,7 @@ public class LHub extends JavaPlugin implements PluginMessageListener {
     {
         return plugin;
     }
+
     public LHub() {
         LHub.plugin = this;
     }
@@ -39,6 +40,8 @@ public class LHub extends JavaPlugin implements PluginMessageListener {
         this.saveDefaultConfig();
 
         //register event listeners
+        StaffManager.init(StaffSettings.SURVIVAL);
+        getLogger().info("[LHub] Initialized staff manager");
         registerListeners();
         getLogger().info("[LHub] Registered listeners");
         registerCommands();
@@ -78,10 +81,7 @@ public class LHub extends JavaPlugin implements PluginMessageListener {
     public void registerListeners() {
         PluginManager pm = Bukkit.getServer().getPluginManager();
         pm.registerEvents(new EntityInteract(), this);
-        pm.registerEvents(new PlayerArmorStand(), this);
-        pm.registerEvents(new PlayerClickInventory(), this);
         pm.registerEvents(new PlayerDrop(), this);
-        pm.registerEvents(new PlayerInteract(), this);
         pm.registerEvents(new PlayerLeave(), this);
         pm.registerEvents(new PlayerMove(), this);
         pm.registerEvents(new WeatherChange(), this);
@@ -102,10 +102,8 @@ public class LHub extends JavaPlugin implements PluginMessageListener {
         getCommand("minigames").setExecutor(new ServerTeleport("minigames"));
         getCommand("playtime").setExecutor(new Playtime());
         getCommand("setspawn").setExecutor(new SetSpawn());
-        getCommand("staff").setExecutor(new Staff());
         getCommand("stop").setExecutor(new Stop());
         getCommand("survival").setExecutor(new ServerTeleport("survival"));
-        getCommand("vanish").setExecutor(new Vanish());
 
     }
 

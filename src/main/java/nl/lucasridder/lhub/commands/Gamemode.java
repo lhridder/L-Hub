@@ -27,16 +27,16 @@ public class Gamemode implements CommandExecutor, TabCompleter {
 
             //own gamemode
             if(args.length == 1) {
-                if (args[0].equalsIgnoreCase("creative") | args[0].equalsIgnoreCase("1")) {
+                if(args[0].equalsIgnoreCase("creative") | args[0].equalsIgnoreCase("1")) {
                     player.setGameMode(GameMode.CREATIVE);
                     sender.sendMessage(ChatColor.GREEN + "Gedaan.");
-                } else if (args[0].equalsIgnoreCase("survival") | args[0].equalsIgnoreCase("0")) {
+                } else if(args[0].equalsIgnoreCase("survival") | args[0].equalsIgnoreCase("0")) {
                     player.setGameMode(GameMode.SURVIVAL);
                     sender.sendMessage(ChatColor.GREEN + "Gedaan.");
-                } else if (args[0].equalsIgnoreCase("spectator") | args[0].equalsIgnoreCase("3")) {
+                } else if(args[0].equalsIgnoreCase("spectator") | args[0].equalsIgnoreCase("3")) {
                     player.setGameMode(GameMode.SPECTATOR);
                     sender.sendMessage(ChatColor.GREEN + "Gedaan.");
-                } else if (args[0].equalsIgnoreCase("adventure") | args[0].equalsIgnoreCase("2")) {
+                } else if(args[0].equalsIgnoreCase("adventure") | args[0].equalsIgnoreCase("2")) {
                     player.setGameMode(GameMode.ADVENTURE);
                     sender.sendMessage(ChatColor.GREEN + "Gedaan.");
                 } else {
@@ -49,23 +49,23 @@ public class Gamemode implements CommandExecutor, TabCompleter {
             //other player gamemode
             if(args.length == 2) {
                 Player target = Bukkit.getServer().getPlayer(args[1]);
-                if (target == null) {
+                if(target == null) {
                     sender.sendMessage(ChatColor.RED + "Doel is niet online");
                     return true;
                 } else {
-                    if (args[0].equalsIgnoreCase("creative") | args[0].equalsIgnoreCase("1")) {
+                    if(args[0].equalsIgnoreCase("creative") | args[0].equalsIgnoreCase("1")) {
                         target.setGameMode(GameMode.CREATIVE);
                         target.sendMessage(ChatColor.GREEN + "Gamemode aangepast.");
                         sender.sendMessage(ChatColor.GREEN + "Gedaan.");
-                    } else if (args[0].equalsIgnoreCase("survival") | args[0].equalsIgnoreCase("0")) {
+                    } else if(args[0].equalsIgnoreCase("survival") | args[0].equalsIgnoreCase("0")) {
                         target.setGameMode(GameMode.SURVIVAL);
                         target.sendMessage(ChatColor.GREEN + "Gamemode aangepast.");
                         sender.sendMessage(ChatColor.GREEN + "Gedaan.");
-                    } else if (args[0].equalsIgnoreCase("spectator") | args[0].equalsIgnoreCase("3")) {
+                    } else if(args[0].equalsIgnoreCase("spectator") | args[0].equalsIgnoreCase("3")) {
                         target.setGameMode(GameMode.SPECTATOR);
                         target.sendMessage(ChatColor.GREEN + "Gamemode aangepast.");
                         sender.sendMessage(ChatColor.GREEN + "Gedaan.");
-                    } else if (args[0].equalsIgnoreCase("adventure") | args[0].equalsIgnoreCase("2")) {
+                    } else if(args[0].equalsIgnoreCase("adventure") | args[0].equalsIgnoreCase("2")) {
                         target.setGameMode(GameMode.ADVENTURE);
                         target.sendMessage(ChatColor.GREEN + "Gamemode aangepast.");
                         sender.sendMessage(ChatColor.GREEN + "Gedaan.");

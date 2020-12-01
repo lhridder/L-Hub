@@ -18,8 +18,8 @@ import org.bukkit.scoreboard.ScoreboardManager;
 public class LHub extends JavaPlugin implements PluginMessageListener {
 
     private static LHub plugin;
-    public static LHub get()
-    {
+
+    public static LHub get() {
         return plugin;
     }
 
@@ -55,7 +55,7 @@ public class LHub extends JavaPlugin implements PluginMessageListener {
                 if(getServer().getOnlinePlayers().size() > 0) {
                     LHub.get().playerCount = PlayerCount.getGlobalPlayerCount();
 
-                    for (Player player : Bukkit.getOnlinePlayers()) {
+                    for(Player player : Bukkit.getOnlinePlayers()) {
                         player.setScoreboard(generateScoreboard(player));
                     }
                 }

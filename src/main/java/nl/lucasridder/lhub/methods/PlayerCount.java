@@ -20,15 +20,15 @@ public class PlayerCount {
             StringBuilder str = new StringBuilder();
 
             int b;
-            while ((b = in.read()) != -1) {
-                if (b > 16 && b != 255 && b != 23 && b != 24) {
+            while((b = in.read()) != -1) {
+                if(b > 16 && b != 255 && b != 23 && b != 24) {
                     str.append((char) b);
                 }
             }
 
             String[] data = str.toString().split("§");
             return Integer.parseInt(data[1]);
-        } catch (Exception e) {
+        } catch(Exception e) {
             e.printStackTrace();
         }
         return -1;

@@ -34,7 +34,7 @@ public class PlayerManager implements Listener {
             float pitch = ConfigManager.getInt("spawn.pitch", 0);
             Location loc = new Location(player.getWorld(), x, y, z, pitch, yaw);
             player.teleport(loc);
-        } catch (Exception e1) {
+        } catch(Exception e1) {
             LHub.get().getLogger().log(Level.WARNING, "Could not teleport player to spawn!");
             e1.printStackTrace();
         }

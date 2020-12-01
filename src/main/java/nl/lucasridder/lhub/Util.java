@@ -36,7 +36,7 @@ public class Util {
         try {
             out.writeUTF("Connect");
             out.writeUTF(server);
-        } catch (IOException e) {
+        } catch(IOException e) {
             e.printStackTrace();
         }
         player.sendPluginMessage(LHub.get(), "BungeeCord", b.toByteArray());
@@ -44,8 +44,7 @@ public class Util {
 
 
     @NotNull
-    public static <T> T preventNull(@Nullable T value, @NotNull T d)
-    {
+    public static <T> T preventNull(@Nullable T value, @NotNull T d) {
         return (value == null ? d : value);
     }
 

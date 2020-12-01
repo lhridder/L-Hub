@@ -16,8 +16,8 @@ public class Stop implements CommandExecutor {
         if(Util.requirePlayer(sender)) {
             sender.sendMessage(ChatColor.GREEN + "Kicking all players...");
             if(plugin.getServer().getOnlinePlayers().size() != 0) {
-                for (Player players : plugin.getServer().getOnlinePlayers()) {
-                    if (!players.equals(sender)) {
+                for(Player players : plugin.getServer().getOnlinePlayers()) {
+                    if(!players.equals(sender)) {
                         players.kickPlayer(ChatColor.GRAY + "De server wordt momenteel herstart" + "\n" +
                                 ChatColor.BLUE + "wacht even met opnieuw joinen" + "\n" +
                                 ChatColor.YELLOW + "Zie actuele status via: " + ChatColor.AQUA + "https://lucasridder.nl/discord");

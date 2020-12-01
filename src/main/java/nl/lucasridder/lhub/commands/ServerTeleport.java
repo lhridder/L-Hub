@@ -18,7 +18,7 @@ public class ServerTeleport implements CommandExecutor {
     }
 
     public boolean onCommand(CommandSender sender, Command command, String s, String[] strings) {
-        if (Util.requirePlayer(sender)) {
+        if(Util.requirePlayer(sender)) {
             Player player = (Player) sender;
             Util.sendTarget(player, server);
         }

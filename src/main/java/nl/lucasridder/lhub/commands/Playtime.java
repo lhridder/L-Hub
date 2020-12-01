@@ -22,9 +22,9 @@ public class Playtime implements CommandExecutor {
             int pth = ptm / 60; //hours
             int ptd = pth / 24; //dagen
 
-            int rm = ptm - (pth*60); //res minutes
-            int rs = pts - (ptm*60); //res seconds
-            int rh = pth - (ptd*24); //res hours
+            int rm = ptm - (pth * 60); //res minutes
+            int rs = pts - (ptm * 60); //res seconds
+            int rh = pth - (ptd * 24); //res hours
 
             //report
             player.sendMessage(ChatColor.GREEN + "Hub playtime: "
@@ -36,7 +36,7 @@ public class Playtime implements CommandExecutor {
         }
         if(args.length == 1) {
             Player target = Bukkit.getServer().getPlayer(args[1]);
-            if (target == null) {
+            if(target == null) {
                 sender.sendMessage(ChatColor.RED + "Doel is niet online");
                 return true;
             } else {
@@ -49,9 +49,9 @@ public class Playtime implements CommandExecutor {
                 int pth = ptm / 60; //hours
                 int ptd = pth / 24; //dagen
 
-                int rm = ptm - (pth*60); //res minutes
-                int rs = pts - (ptm*60); //res seconds
-                int rh = pth - (ptd*24); //res hours
+                int rm = ptm - (pth * 60); //res minutes
+                int rs = pts - (ptm * 60); //res seconds
+                int rh = pth - (ptd * 24); //res hours
 
                 //report
                 player.sendMessage(ChatColor.GOLD + name + ":" + ChatColor.GREEN + " hub playtime: "

@@ -30,15 +30,15 @@ public class StaffController {
      * Refresh player modes and views based on staff settings for that player.
      */
     public void refresh() {
-        if (enabled) enable();
+        if(enabled) enable();
         else disable();
     }
 
     public boolean enable() {
-        if (!permission) return false;
+        if(!permission) return false;
 
         Player onlinePlayer = player.getPlayer();
-        if (onlinePlayer != null) {
+        if(onlinePlayer != null) {
             onlinePlayer.setGameMode(StaffManager.get().settings.staffMode);
         }
 
@@ -48,7 +48,7 @@ public class StaffController {
 
     public void disable() {
         Player onlinePlayer = player.getPlayer();
-        if (onlinePlayer != null) {
+        if(onlinePlayer != null) {
             onlinePlayer.setGameMode(StaffManager.get().settings.playerMode);
         }
 
@@ -67,11 +67,11 @@ public class StaffController {
     public static StaffController of(@NotNull Player player) {
         // Shouldn't happen, but put here just to be sure.
         // Will prevent everything from breaking down if someone forgets to do StaffManager.init(..)
-        if (StaffManager.get() == null) return null;
+        if(StaffManager.get() == null) return null;
 
         UUID playerUUID = player.getUniqueId();
 
-        if (controllers.containsKey(playerUUID)) return controllers.get(playerUUID);
+        if(controllers.containsKey(playerUUID)) return controllers.get(playerUUID);
 
         StaffController newController = new StaffController(player);
         controllers.put(playerUUID, newController);

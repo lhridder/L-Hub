@@ -42,7 +42,7 @@ public class StaffManager {
     }
 
     public static void init(StaffSettings settings) {
-        if (StaffManager.manager != null) {
+        if(StaffManager.manager != null) {
             StaffManager manager = new StaffManager(settings);
         }
     }
@@ -51,15 +51,15 @@ public class StaffManager {
     private static class StaffCommand implements CommandExecutor {
         @Override
         public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
-            if (Util.requirePlayer(sender)) {
+            if(Util.requirePlayer(sender)) {
                 StaffController staff = StaffController.of((Player) sender);
-                if (args.length == 0) {
-                    if (staff.enable()) sender.sendMessage("Staff mode enabled!");
+                if(args.length == 0) {
+                    if(staff.enable()) sender.sendMessage("Staff mode enabled!");
                     else sender.sendMessage("You do not have permission to enable staff mode!");
-                } else if (args.length == 1) {
-                    switch (args[0]) {
+                } else if(args.length == 1) {
+                    switch(args[0]) {
                         case "vanish":
-                            if (staff.isEnabled()) sender.sendMessage("Not implemented yet!");
+                            if(staff.isEnabled()) sender.sendMessage("Not implemented yet!");
                             else sender.sendMessage("Enable staff mode first!");
                         default:
                             return false;
@@ -103,7 +103,7 @@ public class StaffManager {
         public void onInventoryClick(InventoryClickEvent e) {
             Player player = (Player) e.getWhoClicked();
             //cancel if player is not in staff mode
-            if (!StaffController.of(player).isEnabled()) {
+            if(!StaffController.of(player).isEnabled()) {
                 e.setCancelled(true);
                 /* TODO: This does something, although I'm not sure what. Figure it out some time.
                 if(player.isOp()) {

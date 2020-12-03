@@ -1,5 +1,29 @@
-  name: ${project.name}
-  main: nl.lucasridder.lhub.LHub
-  version: ${describe}
-  description: ${project.description}
-  author: ${module.author}
+name: L-Hub
+main: nl.lucasridder.lhub.LHub
+version: 1.0
+description: Plugin for the Hub server
+author: LucasRidder and Snowp
+commands:
+  gamemode:
+    aliases: gm
+    usage: "Usage: /<command> [survival|creative|adventure|spectator|0|1|2|3] ([player])"
+  survival:
+    usage: "/<command>"
+  minigames:
+    usage: "/<command>"
+  kitpvp:
+    usage: "/<command>"
+  setspawn:
+    usage: "/<command>"
+  stop:
+    usage: "/<command>"
+  staff:
+    usage: "/<command>"
+  hub:
+    usage: "/<command>"
+  vanish:
+    aliases: v
+    usage: "/<command>"
+  playtime:
+    aliases: pt
+    usage: "/<command> (player)"

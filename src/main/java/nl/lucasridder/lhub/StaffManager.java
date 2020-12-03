@@ -16,8 +16,6 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.PluginManager;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Objects;
-
 /**
  * @author Snowp
  */
@@ -34,7 +32,8 @@ public class StaffManager {
         PluginManager pm = Bukkit.getServer().getPluginManager();
 
         pm.registerEvents(new StaffEvents(), plugin);
-        Objects.requireNonNull(plugin.getCommand("staff")).setExecutor(new StaffCommand());
+        LHub.get().getLogger().info("register staff command");
+        plugin.getCommand("staff").setExecutor(new StaffCommand());
     }
 
     public static StaffManager get() {
@@ -42,8 +41,9 @@ public class StaffManager {
     }
 
     public static void init(StaffSettings settings) {
-        if(StaffManager.manager != null) {
-            StaffManager manager = new StaffManager(settings);
+        LHub.get().getLogger().info("staff init, manager null: " + (StaffManager.manager == null));
+        if(StaffManager.manager == null) {
+            new StaffManager(settings);
         }
     }
 
@@ -51,21 +51,42 @@ public class StaffManager {
     private static class StaffCommand implements CommandExecutor {
         @Override
         public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
+            LHub.get().getLogger().info("/staff exec");
             if(Util.requirePlayer(sender)) {
+                LHub.get().getLogger().info("/staff get");
                 StaffController staff = StaffController.of((Player) sender);
                 if(args.length == 0) {
-                    if(staff.enable()) sender.sendMessage("Staff mode enabled!");
-                    else sender.sendMessage("You do not have permission to enable staff mode!");
+                    LHub.get().getLogger().info("/staff 0");
+                    String res = staff.enable();
+                    if(res.equals("")) {
+                        LHub.get().getLogger().info("/staff 0 yes");
+                        sender.sendMessage("Staff mode enabled!");
+                    } else {
+                        LHub.get().getLogger().info("/staff 0 no");
+                        sender.sendMessage("Could not enable staff mode: " + res);
+                    }
                 } else if(args.length == 1) {
+                    LHub.get().getLogger().info("/staff 1");
                     switch(args[0]) {
                         case "vanish":
-                            if(staff.isEnabled()) sender.sendMessage("Not implemented yet!");
-                            else sender.sendMessage("Enable staff mode first!");
+                            LHub.get().getLogger().info("/staff vanish");
+                            if(staff.isEnabled()) {
+                                LHub.get().getLogger().info("/staff vanish yes");
+                                sender.sendMessage("Not implemented yet!");
+                            } else {
+                                LHub.get().getLogger().info("/staff vanish no");
+                                sender.sendMessage("Enable staff mode first!");
+                            }
                         default:
+                            LHub.get().getLogger().info("/staff 1 default");
                             return false;
                     }
-                } else return false;
+                } else {
+                    LHub.get().getLogger().info("/staff else false");
+                    return false;
+                }
             }
+            LHub.get().getLogger().info("/staff bottom true");
             return true;
         }
     }
@@ -95,7 +116,7 @@ public class StaffManager {
         // Re-set staff mode properties if a player joins with staff mode enabled
         @EventHandler
         public void onPlayerJoin(PlayerJoinEvent e) {
-            StaffController.of(e.getPlayer()).refresh();
+            StaffController.of(e.getPlayer());
         }
 
         //Inv click

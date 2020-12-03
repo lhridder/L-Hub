@@ -2,7 +2,10 @@ package nl.lucasridder.lhub;
 
 import net.md_5.bungee.api.ChatColor;
 import nl.lucasridder.lhub.commands.*;
-import nl.lucasridder.lhub.listeners.*;
+import nl.lucasridder.lhub.listeners.EntityInteract;
+import nl.lucasridder.lhub.listeners.PlayerLeave;
+import nl.lucasridder.lhub.listeners.PlayerMove;
+import nl.lucasridder.lhub.listeners.WeatherChange;
 import nl.lucasridder.lhub.methods.PlayerCount;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -81,7 +84,6 @@ public class LHub extends JavaPlugin implements PluginMessageListener {
     public void registerListeners() {
         PluginManager pm = Bukkit.getServer().getPluginManager();
         pm.registerEvents(new EntityInteract(), this);
-        pm.registerEvents(new PlayerDrop(), this);
         pm.registerEvents(new PlayerLeave(), this);
         pm.registerEvents(new PlayerMove(), this);
         pm.registerEvents(new WeatherChange(), this);
@@ -100,6 +102,7 @@ public class LHub extends JavaPlugin implements PluginMessageListener {
         getCommand("gamemode").setTabCompleter(new Gamemode());
         getCommand("kitpvp").setExecutor(new ServerTeleport("kitpvp"));
         getCommand("minigames").setExecutor(new ServerTeleport("minigames"));
+        getCommand("hub").setExecutor(new ServerTeleport("lobby"));
         getCommand("playtime").setExecutor(new Playtime());
         getCommand("setspawn").setExecutor(new SetSpawn());
         getCommand("stop").setExecutor(new Stop());

@@ -1,13 +1,10 @@
 package nl.lucasridder.lhub.methods;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.net.InetSocketAddress;
-import java.net.Socket;
-
 public class PlayerCount {
 
     public static int getGlobalPlayerCount() {
+        return 0;
+        /*
         try {
             Socket socket = new Socket();
             socket.connect(new InetSocketAddress("vps3.lucasridder.nl", 25565), 1000);
@@ -32,6 +29,7 @@ public class PlayerCount {
             e.printStackTrace();
         }
         return -1;
+        */
     }
 
 }

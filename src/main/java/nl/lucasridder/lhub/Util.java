@@ -16,11 +16,13 @@ import java.io.IOException;
 public class Util {
 
     public static boolean requirePlayer(CommandSender p) {
-        if(!(p instanceof Player)) {
-            p.sendMessage(ChatColor.RED + "Je bent geen speler!");
-            return false;
-        }
-        return true;
+        return requirePlayer(p, true);
+    }
+
+    public static boolean requirePlayer(CommandSender p, boolean printError) {
+        boolean r = (p instanceof Player);
+        if(printError && !r) p.sendMessage(ChatColor.RED + "Je bent geen speler!");
+        return r;
     }
 
     public static boolean requirePlayer(Object p) {

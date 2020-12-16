@@ -26,8 +26,8 @@ public class SetSpawn implements CommandExecutor {
             ConfigManager.set("spawn.x", x);
             ConfigManager.set("spawn.y", y);
             ConfigManager.set("spawn.z", z);
-            ConfigManager.set("spawn.yaw", yaw);
-            ConfigManager.set("spawn.pitch", pitch);
+            ConfigManager.set("spawn.yaw", Math.round(yaw));
+            ConfigManager.set("spawn.pitch", Math.round(pitch));
             ConfigManager.save();
             sender.sendMessage(ChatColor.GREEN + "Spawn set");
         }

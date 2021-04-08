@@ -1,5 +1,6 @@
 package nl.lucasridder.lhub.commands;
 
+import nl.lucasridder.lhub.ConfigManager;
 import nl.lucasridder.lhub.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -22,25 +23,25 @@ public class Gamemode implements CommandExecutor, TabCompleter {
 
             //te weinig args
             if(args.length == 0 | args.length > 2) {
-                player.sendMessage(ChatColor.RED + "/gamemode (creative/survival/spectator/adventure/0/1/2/3) (speler)");
+                player.sendMessage(ConfigManager.getString(Util.color("messages.gamemodeUsage")));
             }
 
             //own gamemode
             if(args.length == 1) {
                 if(args[0].equalsIgnoreCase("creative") | args[0].equalsIgnoreCase("1")) {
                     player.setGameMode(GameMode.CREATIVE);
-                    sender.sendMessage(ChatColor.GREEN + "Gedaan.");
+                    sender.sendMessage(ConfigManager.getString(Util.color("messages.gamemodeSucces")));
                 } else if(args[0].equalsIgnoreCase("survival") | args[0].equalsIgnoreCase("0")) {
                     player.setGameMode(GameMode.SURVIVAL);
-                    sender.sendMessage(ChatColor.GREEN + "Gedaan.");
+                    sender.sendMessage(ConfigManager.getString(Util.color("messages.gamemodeSucces")));
                 } else if(args[0].equalsIgnoreCase("spectator") | args[0].equalsIgnoreCase("3")) {
                     player.setGameMode(GameMode.SPECTATOR);
-                    sender.sendMessage(ChatColor.GREEN + "Gedaan.");
+                    sender.sendMessage(ConfigManager.getString(Util.color("messages.gamemodeSucces")));
                 } else if(args[0].equalsIgnoreCase("adventure") | args[0].equalsIgnoreCase("2")) {
                     player.setGameMode(GameMode.ADVENTURE);
-                    sender.sendMessage(ChatColor.GREEN + "Gedaan.");
+                    sender.sendMessage(ConfigManager.getString(Util.color("messages.gamemodeSucces")));
                 } else {
-                    player.sendMessage(ChatColor.RED + "/gamemode (creative/survival/spectator/adventure/0/1/2/3) (speler)");
+                    player.sendMessage(ConfigManager.getString(Util.color("messages.gamemodeUsage")));
                 }
                 return true;
             }
@@ -50,27 +51,27 @@ public class Gamemode implements CommandExecutor, TabCompleter {
             if(args.length == 2) {
                 Player target = Bukkit.getServer().getPlayer(args[1]);
                 if(target == null) {
-                    sender.sendMessage(ChatColor.RED + "Doel is niet online");
+                    sender.sendMessage(ConfigManager.getString(Util.color("messages.targetOffline")));
                     return true;
                 } else {
                     if(args[0].equalsIgnoreCase("creative") | args[0].equalsIgnoreCase("1")) {
                         target.setGameMode(GameMode.CREATIVE);
-                        target.sendMessage(ChatColor.GREEN + "Gamemode aangepast.");
-                        sender.sendMessage(ChatColor.GREEN + "Gedaan.");
+                        target.sendMessage(ConfigManager.getString(Util.color("messages.gamemodeChanged")));
+                        sender.sendMessage(ConfigManager.getString(Util.color("messages.gamemodeSucces")));
                     } else if(args[0].equalsIgnoreCase("survival") | args[0].equalsIgnoreCase("0")) {
                         target.setGameMode(GameMode.SURVIVAL);
-                        target.sendMessage(ChatColor.GREEN + "Gamemode aangepast.");
-                        sender.sendMessage(ChatColor.GREEN + "Gedaan.");
+                        target.sendMessage(ConfigManager.getString(Util.color("messages.gamemodeChanged")));
+                        sender.sendMessage(ConfigManager.getString(Util.color("messages.gamemodeSucces")));
                     } else if(args[0].equalsIgnoreCase("spectator") | args[0].equalsIgnoreCase("3")) {
                         target.setGameMode(GameMode.SPECTATOR);
-                        target.sendMessage(ChatColor.GREEN + "Gamemode aangepast.");
-                        sender.sendMessage(ChatColor.GREEN + "Gedaan.");
+                        target.sendMessage(ConfigManager.getString(Util.color("messages.gamemodeChanged")));
+                        sender.sendMessage(ConfigManager.getString(Util.color("messages.gamemodeSucces")));
                     } else if(args[0].equalsIgnoreCase("adventure") | args[0].equalsIgnoreCase("2")) {
                         target.setGameMode(GameMode.ADVENTURE);
-                        target.sendMessage(ChatColor.GREEN + "Gamemode aangepast.");
-                        sender.sendMessage(ChatColor.GREEN + "Gedaan.");
+                        target.sendMessage(ConfigManager.getString(Util.color("messages.gamemodeChanged")));
+                        sender.sendMessage(ConfigManager.getString(Util.color("messages.gamemodeSucces")));
                     } else {
-                        sender.sendMessage(ChatColor.RED + "/gamemode (creative/survival/spectator/adventure)/(0/1/2/3) (speler)");
+                        sender.sendMessage(ConfigManager.getString(Util.color("messages.gamemodeUsage")));
                     }
                     return true;
                 }

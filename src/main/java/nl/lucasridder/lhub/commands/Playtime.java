@@ -35,7 +35,7 @@ public class Playtime implements CommandExecutor {
             return true;
         }
         if(args.length == 1) {
-            Player target = Bukkit.getServer().getPlayer(args[1]);
+            Player target = Bukkit.getPlayer(args[0]);
             if(target == null) {
                 sender.sendMessage(ChatColor.RED + "Doel is niet online");
                 return true;

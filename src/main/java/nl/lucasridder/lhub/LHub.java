@@ -73,8 +73,6 @@ public class LHub extends JavaPlugin implements PluginMessageListener {
     //On disable
     @Override
     public void onDisable() {
-        //stop plugin
-        saveConfig();
 
         //finish
         getLogger().info("[LHub] has been successfully disabled");

@@ -14,3 +14,11 @@ chat:
     seperator: "DARK_GRAY"
     message: "RESET"
 
+messages:
+  targetOffline: "§4Doel is niet online!"
+  gamemodeUsage: "§4/gamemode (creative/survival/spectator/adventure/0/1/2/3) (speler)"
+  gamemodeSucces: "§aGedaan!"
+  gamemodeChanged: "§aGamemode aangepast!"
+  spawnSet: "§aSpawn set"
+  kickAllPlayers: "§aKicking all players..."
+  stopServer: "§aStopping server..."

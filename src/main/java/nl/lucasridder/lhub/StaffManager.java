@@ -1,5 +1,6 @@
 package nl.lucasridder.lhub;
 
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -51,42 +52,35 @@ public class StaffManager {
     private static class StaffCommand implements CommandExecutor {
         @Override
         public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
-            LHub.get().getLogger().info("/staff exec");
             if(Util.requirePlayer(sender)) {
-                LHub.get().getLogger().info("/staff get");
                 StaffController staff = StaffController.of((Player) sender);
                 if(args.length == 0) {
-                    LHub.get().getLogger().info("/staff 0");
-                    String res = staff.enable();
-                    if(res.equals("")) {
-                        LHub.get().getLogger().info("/staff 0 yes");
-                        sender.sendMessage("Staff mode enabled!");
+                    if (!(staff.isEnabled())) {
+                        String res = staff.enable();
+                        if (res.equals("")) {
+                            sender.sendMessage("Staff mode enabled!");
+                        } else {
+                            sender.sendMessage("Could not enable staff mode: " + res);
+                        }
                     } else {
-                        LHub.get().getLogger().info("/staff 0 no");
-                        sender.sendMessage("Could not enable staff mode: " + res);
+                        staff.disable();
+                        sender.sendMessage("Staff mode disabled!");
                     }
                 } else if(args.length == 1) {
-                    LHub.get().getLogger().info("/staff 1");
                     switch(args[0]) {
                         case "vanish":
-                            LHub.get().getLogger().info("/staff vanish");
                             if(staff.isEnabled()) {
-                                LHub.get().getLogger().info("/staff vanish yes");
                                 sender.sendMessage("Not implemented yet!");
                             } else {
-                                LHub.get().getLogger().info("/staff vanish no");
                                 sender.sendMessage("Enable staff mode first!");
                             }
                         default:
-                            LHub.get().getLogger().info("/staff 1 default");
                             return false;
                     }
                 } else {
-                    LHub.get().getLogger().info("/staff else false");
                     return false;
                 }
             }
-            LHub.get().getLogger().info("/staff bottom true");
             return true;
         }
     }

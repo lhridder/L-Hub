@@ -50,4 +50,8 @@ public class Util {
         return (value == null ? d : value);
     }
 
+    public static String color(String input) {
+        return ChatColor.translateAlternateColorCodes('§', input);
+    }
+
 }

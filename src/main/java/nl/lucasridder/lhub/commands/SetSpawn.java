@@ -29,7 +29,7 @@ public class SetSpawn implements CommandExecutor {
             ConfigManager.set("spawn.yaw", Math.round(yaw));
             ConfigManager.set("spawn.pitch", Math.round(pitch));
             ConfigManager.save();
-            sender.sendMessage(ChatColor.GREEN + "Spawn set");
+            sender.sendMessage(ConfigManager.getString(Util.color("messages.spawnSet")));
         }
         return true;
     }

@@ -23,3 +23,8 @@ jobs:
         distribution: 'adopt'
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v2.2.2
+      with:
+       name: jar artifact
+       path: /home/runner/work/L-Hub/L-Hub/target/*.jar
